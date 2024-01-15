@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bios</h1>
+
+<div id="bios">
+  <% @bios.each do |bio| %>
+    <%= render bio %>
+    <p>
+      <%= link_to "Show this bio", bio %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bio", new_bio_path %>
