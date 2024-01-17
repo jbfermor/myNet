@@ -1,11 +1,6 @@
 class BiosController < ApplicationController
   before_action :set_bio, only: %i[ show edit update destroy ]
 
-  # GET /bios or /bios.json
-  def index
-    @bios = Bio.all
-  end
-
   # GET /bios/1 or /bios/1.json
   def show
   end
@@ -22,7 +17,7 @@ class BiosController < ApplicationController
   # POST /bios or /bios.json
   def create
     @bio = Bio.new(bio_params)
-
+    @bio.user = current_user
     respond_to do |format|
       if @bio.save
         format.html { redirect_to bio_url(@bio), notice: "Bio was successfully created." }
@@ -65,6 +60,9 @@ class BiosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bio_params
-      params.require(:bio).permit(:nickname, :name, :surname1, :surname2, :birth_date, :address, :city, :province, :postal_code, :country, :phone, :user_id)
+      params.require(:bio).permit(:nickname, :name, :surname1, 
+      :surname2, :birth_date, :address, :city, :province, 
+      :postal_code, :country, :phone, :user_id, :avatar)
     end
+
 end
