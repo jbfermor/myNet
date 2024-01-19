@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_16_145827) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_19_141206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -69,6 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_145827) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "friend_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "friend_id"
+    t.boolean "confirmed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
+  end
+
   create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "likable_type", null: false
     t.uuid "likable_id", null: false
@@ -101,5 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_145827) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bios", "users"
   add_foreign_key "comments", "posts"
+  add_foreign_key "friend_requests", "users"
   add_foreign_key "posts", "users"
 end

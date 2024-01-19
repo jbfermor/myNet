@@ -3,6 +3,8 @@ class BiosController < ApplicationController
 
   # GET /bios/1 or /bios/1.json
   def show
+    @posts = current_user.posts.most_recent if current_user.posts
+    @find_friend_request = Bio.search(params[:search], current_user)
   end
 
   # GET /bios/new
@@ -62,7 +64,7 @@ class BiosController < ApplicationController
     def bio_params
       params.require(:bio).permit(:nickname, :name, :surname1, 
       :surname2, :birth_date, :address, :city, :province, 
-      :postal_code, :country, :phone, :user_id, :avatar)
+      :postal_code, :country, :phone, :user_id, :avatar, :search)
     end
 
 end

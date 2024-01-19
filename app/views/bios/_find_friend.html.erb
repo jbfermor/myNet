@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="accordion" id="accordionFindFriend">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFindFriend" aria-expanded="true" aria-controls="collapseOne">
+          Find a friend
+        </button>
+      </h2>
+      <div id="collapseFindFriend" class="accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#accordionFindFriend">
+        <div class="accordion-body">
+          <div class="card" style="width:100%">
+            <div class="card-body">
+              <%= render "home/find_friend" %>
+            </div>
+            <div class="card-body">
+              <ul class="list-group">
+                <% if @find_friend_request %>
+                  <% @find_friend_request.each do |bio| %>
+                  <div class="row">
+                    <div class="col-10">
+                      <li class="list-group-item"><%= bio.nickname %></li>
+                    </div>
+                    <div class="col-2">
+                      <%= link_to "Add friend", root_path, class:"btn btn-primary rounded"%>
+                    </div>
+                  </div>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
