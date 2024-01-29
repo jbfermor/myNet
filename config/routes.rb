@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'friend_request/create'
+  get 'friend_request/delete'
   resources :comments
   resources :posts
   resources :bios

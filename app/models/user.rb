@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :bio
   has_many :posts
   has_many :friend_requests
-  has_many pending_friend_requests, -> { where confirmed: false }, class_name: "FriendRequest", foreign_key: "friend_id"
+  has_many :pending_friend_requests, -> { where confirmed: false }, class_name: "FriendRequest", foreign_key: "friend_id"
 
   def friends
     friends_i_sent_request = FriendRequest.where(user_id: id, confirmed: true).pluck(:friend_id)
