@@ -5,6 +5,8 @@ class BiosController < ApplicationController
   def show
     @posts = current_user.posts.most_recent if current_user.posts
     @find_friend_request = Bio.search(params[:search], current_user)
+    @active_friend_requests = FriendRequest.requested?(current_user)
+    @pending_to_accept = FriendRequest.pending?(current_user)
   end
 
   # GET /bios/new

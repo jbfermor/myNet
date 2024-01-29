@@ -1,0 +1,29 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="requestedFriedsdhip">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFriendsRequested" aria-expanded="false" aria-controls="collapseOne">
+      Requested friendship 
+      <span class="badge bg-primary ms-5"><%= @active_friend_requests.count %></span>
+    </button>
+       
+  </h2>
+  <div id="collapseFriendsRequested" class="accordion-collapse" aria-labelledby="requestedFriedsdhip" data-bs-parent="#collapseFriendsRequested">
+    <div class="accordion-body">
+      <div class="card" style="width:100%">
+        <div class="card-body">
+          <ul class="list-group">
+            <% if @active_friend_requests %>
+              <% @active_friend_requests.each do |user| %>
+              <div class="row">
+                <div class="col-10">
+                  <li class="list-group-item"><%= User.find(user.friend_id).bio.nickname %></li>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

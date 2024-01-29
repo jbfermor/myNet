@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 
   def index
     @post = Post.new
+    @comment = Comment.new
+    @friends_posts = current_user.friends_posts
   end
   
   private

@@ -1,32 +1,50 @@
-<%= form_with(model: comment) do |form| %>
-  <% if comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="row mt-3 d-flex flex-column">
+  <% related_post.comments.each do |comment| %>
+    <div class="col-10 col-lg-6 mb-3 mx-auto">
+      <div class="card" style= "width: 100%">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-9"><%= User.find(comment.commentarist).bio.nickname %></div>
+              <div class="col-3 text-end text-secondary" 
+              style="font-size: 10px">
+                <%= comment.created_at.strftime("%d/%m/%Y") %>
+              </div>   
+            </div>
+          </div>
+        <div class="card-body">
+          <div class="list-group-flush">
+            <li class="list-group-item"><%= comment.content %></li>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_field :content %>
-  </div>
+<div class="row justify-content-end mb-2">
+  <div class="card card-body">
+    <%= form_with(model: @comment) do |form| %>
+      <% if @comment.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-  <div>
-    <%= form.label :post_id, style: "display: block" %>
-    <%= form.text_field :post_id %>
+          <ul>
+            <% @comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-10">
+          <%= form.text_field :content, class: "form-control" %>
+        </div>
+        <div class="col-2 text-end">
+          <%= form.text_field :post_id, value: related_post.id, type: "hidden" %>
+          <%= form.submit "Send", class: "btn btn-success" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
