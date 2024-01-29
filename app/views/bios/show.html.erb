@@ -11,21 +11,7 @@
   </div>
   <div class="row mt-3 d-flex flex-column">
       <% @posts.each do |post| %>
-        <div class="col-10 col-lg-6 mb-3 mx-auto">
-          <div class="card" style= "width: 100%" >
-            <div class="card-body">
-              <div class="list-group-flush">
-                <li class="list-group-item">
-                  <%= post.content %></p>
-                </li>
-                <li class="list-group-item text-end text-secondary " 
-                style="font-size: 10px">
-                  <%= post.created_at.strftime("%d/%m/%Y") %>
-                </li>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%= render partial: "posts/post", locals: {post: post} %>
       <% end %>
     </div>
   </div>

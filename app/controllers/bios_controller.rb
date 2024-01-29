@@ -7,6 +7,7 @@ class BiosController < ApplicationController
     @find_friend_request = Bio.search(params[:search], current_user)
     @active_friend_requests = FriendRequest.requested?(current_user)
     @pending_to_accept = FriendRequest.pending?(current_user)
+    @comment = Comment.new
   end
 
   # GET /bios/new
