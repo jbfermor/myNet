@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_29_091130) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_29_170551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -84,7 +84,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_091130) do
     t.uuid "likable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
     t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -112,5 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_091130) do
   add_foreign_key "bios", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "friend_requests", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
 end

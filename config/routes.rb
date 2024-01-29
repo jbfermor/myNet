@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes, only: %i[create destroy]
   resources :friend_request
   resources :comments
   resources :posts

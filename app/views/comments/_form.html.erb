@@ -17,6 +17,16 @@
             <li class="list-group-item"><%= comment.content %></li>
           </div>
         </div>
+        <div class="card-footer text-start">
+          <div class="row">
+            <div class="col-2 me-1">
+              <%= render partial: "likes/like_button", locals: { likable: comment} %>              
+            </div>
+            <div class="col-1">
+              <%= comment.likes.count %>              
+            </div>
+          </div>  
+        </div>
       </div>
     </div>
   <% end %>

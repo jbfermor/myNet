@@ -1,0 +1,9 @@
+<% like = current_user.likes.find_by(likable: likable) %>
+<% if like.nil? %>  
+  <%=button_to("Like", likes_path,  class:"btn btn-success",  
+  params:{ like: {likable_id: likable.id,  
+  likable_type: likable.class.to_s}})%>
+<% else %>  
+  <%=button_to("Unlike", like_path(like),  
+  class:"btn btn-success",  method: :delete)%>
+<% end %>
